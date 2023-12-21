@@ -3,14 +3,16 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="home"></ion-back-button>
     </ion-buttons>
+    <!-- Titulek stránky s textem ve velkých písmenech, zobrazující jméno z details objektu -->
     <ion-title class="ion-text-capitalize">{{ details?.name }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <!-- details objekt existuje -->
   <div *ngIf="details">
     <swiper-container pager="true" [options]="slideOpts">
+        <!-- Swiper-slide, který začíná od indexu 2 -->
       <swiper-slide *ngFor="let sprite of details.images.slice(2)">
         <img [src]="sprite" style="height: 250px;">
       </swiper-slide>
@@ -29,13 +31,17 @@
       <ion-card-content>
         <ion-list lines="full">
           <ion-item>
+            <!-- Label zobrazující název schopnosti pro každou schopnost v details.abilities -->
             <ion-label text-wrap><b>Abilities:</b> <span *ngFor="let a of details.abilities; let isLast = last"
                 class="ion-text-capitalize">
                 {{ a.ability.name }}{{ !isLast ? ',' : '' }}
               </span></ion-label>
           </ion-item>
+          <!-- Ion-item pro každou statistiku v details.stats -->
           <ion-item *ngFor="let s of details.stats" class="ion-text-capitalize">
+            <!-- Label slotu "start" zobrazující název statistiky -->
             <ion-label slot="start"><b>{{ s.stat.name }}:</b></ion-label>
+            <!-- Label slotu "end" zobrazující hodnotu statistiky -->
             <ion-label slot="end">
               {{ s.base_stat }}
             </ion-label>

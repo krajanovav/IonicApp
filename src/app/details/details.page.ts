@@ -11,7 +11,7 @@ import { SwiperModule } from 'swiper/types/shared';
 })
 export class DetailsPage implements OnInit {
 
-  details: any;
+  details: any;       // Proměnná pro ukládání detailů
   slideOpts = {
     initialSlide: 0,
     speed: 400,
@@ -24,8 +24,10 @@ export class DetailsPage implements OnInit {
   constructor(private route: ActivatedRoute, private pokeService: PokemonService) { }
 
   ngOnInit() {
+    // Získání indexu z url odkazu pomocí ActivatedRoute
     let index = +this.route.snapshot.paramMap.get('index')!.toString() || 0;
     
+    // Volání metody getPokeDetails ze služby PokemonService a předání indexu
     this.pokeService.getPokeDetails(index).subscribe(details => {
       this.details = details;
     });

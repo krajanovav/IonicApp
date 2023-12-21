@@ -1,23 +1,25 @@
 <ion-header>
   <ion-toolbar color="primary">
+     <!-- Odkaz na úvodní stránku s možností obnovení stránky -->
     <a routerLink="/home" routerDirection="root" (click)="reloadPage()">
       <ion-title style="flex: 1; text-align: center; margin-right: 20px;">
         <img src="../../assets/icon/Pokédex_logo.png">
       </ion-title>
     </a>
-    <ion-buttons slot="end">
-      <!-- Můžete přidat další tlačítka nebo prvky podle potřeby -->
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+   <!-- Vyhledávací lišta pro hledání Pokémonů -->
   <ion-searchbar placeholder="Search Pokemon" (ionChange)="onSearchChange($event)"></ion-searchbar>
+   <!-- Zobrazení skeletu pokud se nenačte žádný pokemon-->
   <ion-list *ngIf="pokemon.length == 0">
+    <!--zobrazení 5 skeletů -->
     <ion-item *ngFor="let i of [1,2,3,4,5]">
       <ion-avatar slot="start">
         <ion-skeleton-text animated></ion-skeleton-text>
       </ion-avatar>
+      <!-- animovaný text -->
       <ion-label class="ion-text-capitalize">
         <h2>
           <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
@@ -28,7 +30,7 @@
       </ion-label>
     </ion-item>
   </ion-list>
-
+<!-- Seznam zobrazených Pokémonů -->
   <ion-list>
     <ion-item *ngFor="let poke of pokemon;" [routerLink]="poke.pokeIndex">
       <ion-avatar slot="start">
@@ -41,8 +43,9 @@
       </ion-label>
     </ion-item>
   </ion-list>
-
+ <!-- Infinite scroll -->
   <ion-infinite-scroll (ionInfinite)="loadPokemon(true, $event)">
+      <!-- Zobrazení načítacího spinneru(ikonka) a textu -->
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more Pokemon...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
